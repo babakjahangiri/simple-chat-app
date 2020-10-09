@@ -7,7 +7,7 @@ first run
 npm install 
 ```
 
-##make .env file with below format :
+make .env file with below format :
 
 ```bash
  SERVER_IP =
