@@ -2,8 +2,12 @@
 Simple chat application with Socket.io &amp; Nodejs &amp; MongoDb &amp; Mongoose
 
 ##
-first run npm install 
-make .env file with below format :
+first run
+```bash
+npm install 
+```
+
+##make .env file with below format :
 
 ```bash
  SERVER_IP =
