@@ -5,8 +5,11 @@ Simple chat application with Socket.io &amp; Nodejs &amp; MongoDb &amp; Mongoose
 first run npm install 
 make .env file with below format :
 
-######SERVER_IP =
-######DB_CONNECTION = 
+```bash
+ SERVER_IP =
+ DB_CONNECTION = 
+```
+ 
 
 save the file 
 
