@@ -6,6 +6,7 @@ first run npm install
 make .env file with below format :
 
 SERVER_IP =
+.
 DB_CONNECTION = 
 
 save the file 
