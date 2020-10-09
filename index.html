@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <br />
+      <div class="jumbotron">
+        <h1 class="display-4">Send Message</h1>
+        <br />
+        <input id="name" class="form-control" placeholder="Name" />
+        <br />
+        <textarea
+          id="message"
+          class="form-control"
+          placeholder="Message"
+        ></textarea>
+        <br />
+        <button id="send" class="btn btn-success">Send</button>
+      </div>
+      <div id="messages"></div>
+    </div>
+  </body>
+  <script>
+    var socket = io();
+    //const ServerIP = "192.168.1.12";
+    const ServerIP = "localhost";
+
+    $(() => {
+      //  console.log("loaded");
+      $("#send").click(() => {
+        var message = { name: $("#name").val(), msg: $("#message").val() };
+
+        if (
+          $("#name").val() !== undefined &&
+          $("#message").val() !== undefined
+        ) {
+          console.log("posted");
+          $("#message").val("");
+          postMessage(message);
+        }
+      });
+      getMessages();
+    });
+
+    socket.on("message", addMessages);
+
+    function addMessages(message) {
+      $("#messages").prepend(
+        `<div><h4>${message.name}</h4><p>${message.msg}</p><div>`
+      );
+      console.log("the message object :", message);
+    }
+
+    function getMessages() {
+      $.get(`http://${ServerIP}:5000/messages`, (data) => {
+        // console.log(data);
+        data.forEach(addMessages);
+      });
+    }
+
+    function postMessage(message) {
+      //  console.log(req.body);
+      $.post(`http://${ServerIP}:5000/messages`, message);
+    }
+  </script>
+</html>
